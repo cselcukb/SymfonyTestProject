@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Symfony 4 Test Project</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    {% block stylesheets %}
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/css/layout.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" type="text/css">
+    {% endblock %}
+</head>
+<body>
+{% if app.user %}
+<!-- Main navbar -->
+<div class="navbar navbar-expand-md navbar-dark">
+    <div class="navbar-brand">
+        <a href="{{ url('webapp_dashboard') }}" class="d-inline-block">
+            <h3 style="margin-left: 5px; color: white; padding: 0px; position: relative; display: inline;">Symfony Test App</h3>
+        </a>
+    </div>
+    <div class="d-md-none">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
+            <i class="icon-tree5"></i>
+        </button>
+        <button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
+            <i class="icon-paragraph-justify3"></i>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-mobile">
+        <span class="badge bg-success ml-md-3 ml-md-auto">{{ date() | date("m/d/Y h:i:s") }}</span>
+{#        <ul class="navbar-nav">#}
+{#            <li class="nav-item dropdown dropdown-user">#}
+{#                <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">#}
+{#                    <span>{{ app.user.username }}</span>#}
+{#                </a>#}
+{#                <div class="dropdown-menu dropdown-menu-right">#}
+{#                    <a href="{{ url('logout') }}" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>#}
+{#                </div>#}
+{#            </li>#}
+{#        </ul>#}
+{#        <ul class="navbar-nav">#}
+{#            <li class="nav-item">#}
+{#                <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">#}
+{#                    <i class="icon-paragraph-justify3"></i>#}
+{#                </a>#}
+{#            </li>#}
+{#        </ul>#}
+    </div>
+</div>
+{% endif %}
+<!-- /main navbar -->
+<!-- Page content -->
+<div class="page-content">
+
+    <!-- Main sidebar -->
+    <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
+        <!-- Sidebar mobile toggler -->
+        <div class="sidebar-mobile-toggler text-center">
+            <a href="#" class="sidebar-mobile-main-toggle">
+                <i class="icon-arrow-left8"></i>
+            </a>
+            Navigation
+            <a href="#" class="sidebar-mobile-expand">
+                <i class="icon-screen-full"></i>
+                <i class="icon-screen-normal"></i>
+            </a>
+        </div>
+        <!-- Sidebar content -->
+        <div class="sidebar-content">
+            <!-- Main navigation -->
+            <div class="card card-sidebar-mobile">
+                <ul class="nav nav-sidebar" data-nav-type="accordion">
+                    <!-- Main -->
+                    <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
+                    <li class="nav-item">
+                        <a href="{{ url('webapp_dashboard') }}" class="nav-link">
+{#                            <img src="/assets/images/icons/dashboard.png" style="margin-right: 1.25rem;margin-top: .12502rem;margin-bottom: .12502rem;top: 0;"></img>#}
+                            <span style="color:#fff;">Users</span>
+                        </a>
+                    </li>
+{#                    <li class="nav-item">#}
+{#                        <a href="{{ url('route_analytics') }}" class="nav-link">#}
+{#                            <img src="/assets/images/icons/results.png" style="margin-right: 1.25rem;margin-top: .12502rem;margin-bottom: .12502rem;top: 0;"></img>#}
+{#                            <span style="color:#fff;">Analytics</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="nav-item nav-item-submenu">#}
+{#                        <a href="#" class="nav-link">#}
+{#                            <img src="/assets/images/icons/routes.png" style="margin-right: 1.25rem;margin-top: .12502rem;margin-bottom: .12502rem;top: 0;"></img>#}
+{#                            <span style="color:#fff;">Routes</span>#}
+{#                        </a>#}
+{#                    </li>#}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrapper">
+{#        <div class="page-header page-header-light">#}
+{#            <div>#}
+{#                {% if app.request.attributes.get('_route') != 'dashboard' %}#}
+{#                    <div style="display: inline-block;margin: 15px;padding-left: 10px;">#}
+{#                        <label class="btn btn-primary btn-lg" style="background-color: #4d9a92;cursor: pointer;">#}
+{#                            <span class="goback" onclick="goBack();">Dashboard</span>#}
+{#                        </label>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#            <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">#}
+{#                <div class="d-flex">#}
+{#                    <div class="breadcrumb">#}
+{#                        <span class="breadcrumb-item active">{{ title }}</span>#}
+{#                    </div>#}
+
+{#                    <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
+        <!-- Footer -->
+        <div class="navbar navbar-expand-lg navbar-light">
+            <div class="text-center d-lg-none w-100">
+                <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
+                    <i class="icon-unfold mr-2"></i>
+                    Footer
+                </button>
+            </div>
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /main content -->
+</div>
+<!-- /global stylesheets -->
+{% block scripts %}
+    <!-- core JS files -->
+{#    <script src="{{ asset('assets/js/main/jquery.min.js') }}"></script>#}
+    <script type="text/javascript" src="{{ asset('assets/js/main/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/main/bootstrap.bundle.min.js') }}"></script>
+    <!-- /core JS files -->
+    <!-- app JS files -->
+    <script type="text/javascript" src="{{ asset('assets/js/app.js') }}"></script>
+    <!-- /app JS files -->
+{% endblock %}
+<!-- /page content -->
+{% block pageScripts %}
+{% endblock %}
+</body>
+</html>

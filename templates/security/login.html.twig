@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symfony Test Application - Login</title>
+    <link rel="shortcut icon" href="/floh-fav.png" type="image/x-icon">
+    <link rel="icon" href="/floh-fav.png" type="image/x-icon">
+    {% block styles %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/override.css') }}">
+    {% endblock %}
+</head>
+<body>
+<div class="form-body without-side" style="    text-align: center !important;">
+        <div class="form-signin" style="width: 100%; max-width: 330px; padding: 15px; padding-top: 75px; margin: 0 auto;">
+            <div class="form-content">
+                <div class="form-items">
+                    {% block body %}
+                        <h3>Login to account</h3>
+                        <form action="{{ url('webapp_login') }}" method="post" >
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
+                            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                            <label for="inputEmail">Username</label>
+                            <input type="text" value="{{ last_username }}" name="username" class="form-control" required autofocus>
+                            <label for="inputPassword">Password</label>
+                            <input type="text" name="password" class="form-control" required>
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+                            <button class="btn btn-lg btn-primary" type="submit">
+                                Sign in
+                            </button>
+                        </form>
+                        {#
+                        <div class="page-links mt-1 mb-1" style="text-align: center">
+                            <a href="mailto:team@flohtech.com" >Contact Us</a>
+                        </div>
+                        #}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block scripts %}
+    <script src="{{ asset('assets/ioform/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/ioform/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/ioform/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/ioform/js/main.js') }}"></script>
+{% endblock %}
+</body>
+</html>

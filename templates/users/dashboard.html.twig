@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{#{% block title %}Log in!{% endblock %}#}
+
+{% block body %}
+    <div id="apiContent">
+        <div class="row mb-3">
+            <div class="col-md-2">
+                <input id="displayListUserTab" type="button" class="btn btn-success ml-1 btn-ex std_font" onclick="listUsers();" value="List Users">
+            </div>
+            <div class="col-md-2">
+                <input id="displayAddUserTab" type="button" class="btn btn-info ml-1 btn-ex std_font" onclick="showTab('createUser');" value="Add User">
+            </div>
+        </div>
+        <!-- Tab panes -->
+        <div class="users-tab-content">
+            <div class="tab-pane" id="userlist">
+                <table class="table">
+                    <thead>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Tasks</th>
+                    </thead>
+                    <tbody id="userListTableContent">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="updateUser">
+                <form id="updateForm">
+                    <h1 class="h3 mb-3 font-weight-normal">Update User</h1>
+                    <label for="inputPassword">Name</label>
+                    <input type="text" name="name" id="updateUserName" class="form-control" required>
+                    <input type="hidden" name="id" id="updateUserId" class="form-control" required>
+                    <label for="inputEmail">Username</label>
+                    <input type="text" value="" name="username" id="updateUserUsername" class="form-control" required autofocus>
+                    <label for="inputPassword">Password</label>
+                    <input type="text" name="password" id="updateUserPassword" class="form-control" required>
+                    <a class="btn btn-lg btn-primary" id="updateUser" onclick="updateUserAction()">
+                        Update User
+                    </a>
+                </form>
+            </div>
+            <div class="tab-pane" id="createUser">
+                <form id="createForm">
+                    <h1 class="h3 mb-3 font-weight-normal">Create User</h1>
+                    <label for="inputPassword">Name</label>
+                    <input type="text" name="name" id="createUserName" class="form-control" required>
+                    <label for="inputEmail">Username</label>
+                    <input type="text" value="" name="username" id="createUserUsername" class="form-control" required autofocus>
+                    <label for="inputPassword">Password</label>
+                    <input type="text" name="password" id="createUserPassword" class="form-control" required>
+                    <a class="btn btn-lg btn-primary" id="createUser" onclick="createUserAction()">
+                        Update User
+                    </a>
+                </form>
+            </div>
+            <div class="tab-pane" id="loginUser">
+                <form id="loginForm">
+                    <h1 class="h3 mb-3 font-weight-normal">Try User Password</h1>
+                    <label for="inputEmail">Username</label>
+                    <input type="text" value="" name="username" id="loginUsername" class="form-control" required autofocus>
+                    <label for="inputPassword">Password</label>
+                    <input type="text" name="password" id="loginPassword" class="form-control" required>
+                    <a class="btn btn-lg btn-primary" id="loginUser" onclick="loginUserAction()">
+                        Sign in
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block pageScripts %}
+    <script type="text/javascript">
+        var getAPITokenURL  = "{{ url('api_get_authToken') }}";
+        var getUsersURL     = "{{ url('api_get_userlist') }}";
+        var getUserURL      = "{{ app.request.getSchemeAndHttpHost() }}/api/user/{user_id}";
+        var createUserURL   = "{{ url('api_create_user') }}";
+        var updateUserURL   = "{{ app.request.getSchemeAndHttpHost() }}/api/user/update/{user_id}";
+        var loginUserURL    = "{{ url('api_login_user') }}";
+    </script>
+    <script src="{{ asset('assets/js/modules/user/dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+# config/packages/security.yaml
+security:
+    # ...
+
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    providers:
+        users:
+            entity:
+                class: App\Entity\User
+                property: api_token
+
+    access_control:
+        - { path: /dashboard, roles: ROLE_USER }
+
+    firewalls:
+        public:
+            context: website
+            anonymous: lazy
+            provider: users
+            #            methods: [ GET ]
+            pattern: /api/getAuthToken
+            security: true
+
+        token:
+            provider: users
+            stateless: true
+            anonymous: false
+            pattern: ^/api
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator
+
+        login:
+            context: website
+            provider: users
+            anonymous: lazy
+            security: true
+            #            anonymous: lazy
+            pattern: /
+            logout:
+                path: webapp_logout
+
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+
+            # if you want, disable storing the user in the session
+            # stateless: true
+
+            # ...
